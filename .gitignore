@@ -1,0 +1,12 @@
+__pycache__/
+
+.idea
+.vscode
+.cache
+
+/dist
+/dlpipe.egg-info
+
+connections.ini
+
+**/*.log

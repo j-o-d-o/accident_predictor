@@ -1,0 +1,6 @@
+[localhost_mongo_db]
+type=MongoDB
+url=localhost
+port=27017
+#user=user_name
+#pwd=password

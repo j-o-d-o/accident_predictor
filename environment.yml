@@ -1,0 +1,14 @@
+name: accident_predictor_env
+dependencies:
+  - numpy
+  - pymongo
+  - hdf5
+  - h5py
+  - pillow
+  - pytest
+  - plotly
+  - scipy
+  - pip:
+    - namedlist
+    - keras==2.2.2
+    - opencv-python
