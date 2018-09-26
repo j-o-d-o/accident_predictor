@@ -90,7 +90,7 @@ Apart from that, the class distribution of the original dataset also shows other
 - *vehicle_type*: merging some similar and under represented classes such as [LKW bis 7.5t, Transporter, Kleinbus] to one.
 - *light*: merge [Dunkelheit: Strassenbleuctung vorhanden und nicht beleuchtet, Dunkeleheit keine Strassenbleuchtung] as it basically is the same.
 
-e.g. age distrubtion plot:
+e.g. age distrubtion plot:</br>
 ![age post sample](./readme_images/age_post_sample.png)
 
 
