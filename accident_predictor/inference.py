@@ -1,7 +1,7 @@
 import configparser
 from dlpipe.data_reader.mongodb import MongoDBConnect
 from accident_predictor.metrics import single_class_precision, single_class_recall
-from accident_predictor.train import PreProcessData
+from accident_predictor.processors import PreProcessData
 from dlpipe.utils import DLPipeLogger
 from bson import ObjectId
 from keras.models import load_model
@@ -12,7 +12,7 @@ import csv
 
 
 # ID of the experiment that should be loaded
-EXP_ID = "5baa6dd932b90159c4fe31e9"
+EXP_ID = "5babbf0432b9013f314a1e7c"
 # Index (usually equals the epoch number + 1) of the weights that should be loaded, takes latest if None
 INDEX = None
 

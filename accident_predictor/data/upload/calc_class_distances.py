@@ -184,13 +184,7 @@ class Distance(object):
         return self.value > rh.value
 
 
-if __name__ == "__main__":
-    DLPipeLogger.remove_file_logger()
-
-    cp = configparser.ConfigParser()
-    if len(cp.read('./../../connections.ini')) == 0:
-        raise ValueError("Config File could not be loaded, please check the correct path!")
-    MongoDBConnect.add_connections_from_config(cp)
+def upload_distances():
     col = MongoDBConnect.get_collection("localhost_mongo_db", "accident", "train")
 
     raw_data_0 = col.find({"accident_severity": 0})
@@ -232,3 +226,14 @@ if __name__ == "__main__":
 
     save_to_db(col_save, top_k_1, 1, [0, 2])
     save_to_db(col_save, top_k_2, 2, [0, 1])
+
+
+if __name__ == "__main__":
+    DLPipeLogger.remove_file_logger()
+
+    cp = configparser.ConfigParser()
+    if len(cp.read('./../../connections.ini')) == 0:
+        raise ValueError("Config File could not be loaded, please check the correct path!")
+    MongoDBConnect.add_connections_from_config(cp)
+
+    upload_distances()

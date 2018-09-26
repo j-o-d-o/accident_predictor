@@ -7,18 +7,6 @@ import plotly.graph_objs as go
 import plotly.offline as offline
 
 
-def get_collection():
-    """
-    :return: collection which holds the experiments
-    """
-    cp = configparser.ConfigParser()
-    if len(cp.read('./connections.ini')) == 0:
-        raise ValueError("Config File could not be loaded, please check the correct path!")
-    MongoDBConnect.add_connections_from_config(cp)
-    col = MongoDBConnect.get_collection("localhost_mongo_db", "models", "experiment")
-    return col
-
-
 def create_plot_data(convert_data: list, batch_size: int, smooth_window: int=1):
     """
     Convert metric data into x, y graph data
@@ -48,12 +36,11 @@ def create_plot_data(convert_data: list, batch_size: int, smooth_window: int=1):
     return x_values, y_values
 
 
-def plot_acc_loss_graph(exp_id):
+def plot_acc_loss_graph(exp_id, col):
     """
     Create a scatter plot of loss and accuracy for validation and training data
     :param exp_id: Experiment Id
     """
-    col = get_collection()
     exp_obj = col.find_one({"_id": ObjectId(exp_id)})
 
     batch_size = int(exp_obj["max_batches_per_epoch"])
@@ -75,5 +62,11 @@ def plot_acc_loss_graph(exp_id):
 if __name__ == "__main__":
     DLPipeLogger.remove_file_logger()
 
+    cp = configparser.ConfigParser()
+    if len(cp.read('./connections.ini')) == 0:
+        raise ValueError("Config File could not be loaded, please check the correct path!")
+    MongoDBConnect.add_connections_from_config(cp)
+    col_exp = MongoDBConnect.get_collection("localhost_mongo_db", "models", "experiment")
+
     plot_exp_id = "5ba802c732b9016996d2f0cc"
-    plot_acc_loss_graph(plot_exp_id)
+    plot_acc_loss_graph(plot_exp_id, col_exp)

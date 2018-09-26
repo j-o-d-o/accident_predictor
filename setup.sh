@@ -15,10 +15,6 @@ fi
 ###################################
 ## VARIABLE SETTINGS && DEFAULTS ##
 ###################################
-# force update of packages (takes a little longer)
-UPDATE_MODE=true
-# specifiy pycharm path to open pycharm with the current conda env
-PYCHARM_PATH="/opt/pycharm-community-2018.1/bin/pycharm.sh"
 # environment name
 ENV_NAME="accident_predictor_env"
 
@@ -47,30 +43,19 @@ done
 ###########
 ## START ##
 ###########
-# Create env, update and start pycharm
-if [ "$UPDATE_MODE" = true ]; then
-    # installing tensorflow as conda can not find it from the environment.yml file
-    echo INSTALL TENSORFLOW FROM PIP
-    pip install tensorflow
-
-    if [[ $PATH != $ENV_NAME ]]; then
-      # Check if the environment exists
-      source activate $ENV_NAME
-      if [ $? -eq 0 ]; then
-        echo ------------ Update Env    ------------
-        conda env update -f environment.yml
-      else
-        # Create the environment and activate
-        echo ------------ Create Env  ------------
-        conda env create -f environment.yml
-        source activate $ENV_NAME
-      fi
-    fi
-else
+# Create/Update env
+if [[ $PATH != $ENV_NAME ]]; then
+  # Check if the environment exists
+  source activate $ENV_NAME
+  if [ $? -eq 0 ]; then
+    echo ------------ Update Env    ------------
+    conda env update -f environment.yml
+  else
+    # Create the environment and activate
+    echo ------------ Create Env  ------------
+    conda env create -f environment.yml
     source activate $ENV_NAME
+  fi
 fi
 
 KERAS_BACKEND=tensorflow
-
-echo ------------ Start PyCharm ------------
-eval $PYCHARM_PATH 2> /dev/null &

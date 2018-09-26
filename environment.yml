@@ -1,5 +1,6 @@
 name: accident_predictor_env
 dependencies:
+  - python=3.6
   - numpy
   - pymongo
   - hdf5
@@ -8,7 +9,10 @@ dependencies:
   - pytest
   - plotly
   - scipy
+  - numba
+  - scikit-learn
   - pip:
     - namedlist
-    - keras==2.2.2
+    - tensorflow
+    - keras
     - opencv-python

@@ -6,6 +6,7 @@ import configparser
 from dlpipe.data_reader.mongodb import MongoDBConnect
 from dlpipe.utils import DLPipeLogger
 from accident_predictor.data.upload.data_encoder import sin_cos_representation
+from accident_predictor.data.upload.calc_class_distances import upload_distances
 from keras.utils.np_utils import to_categorical
 import numpy as np
 import copy
@@ -162,6 +163,9 @@ if __name__ == "__main__":
     MongoDBConnect.add_connections_from_config(cp)
     col_train = MongoDBConnect.get_collection("localhost_mongo_db", "accident", "train")
     col_distance = MongoDBConnect.get_collection("localhost_mongo_db", "accident", "k_distance")
+
+    # find class distances
+    upload_distances()
 
     # get averaged class distances for class 1 and 2
     raw_distance_data_avg_class_1 = col_distance.find({"class": 1, "compared_to": {"$all": [0, 2]}})
