@@ -9,12 +9,7 @@ import gridfs
 import os
 import numpy as np
 import csv
-
-
-# ID of the experiment that should be loaded
-EXP_ID = "5babbf0432b9013f314a1e7c"
-# Index (usually equals the epoch number + 1) of the weights that should be loaded, takes latest if None
-INDEX = None
+import sys
 
 
 def get_class_distribution(result):
@@ -59,6 +54,16 @@ def print_train_data_info(row, class_prediction, distribution):
 
 if __name__ == "__main__":
     DLPipeLogger.remove_file_logger()
+
+    # ID of the experiment that should be loaded
+    EXP_ID = "5bac50ca32b9011693a63274"
+    # Index (usually equals the epoch number + 1) of the weights that should be loaded, takes latest if None
+    INDEX = None
+
+    if len(sys.argv) > 1:
+        EXP_ID = sys.argv[1]
+    if len(sys.argv) > 2:
+        INDEX = int(sys.argv[2])
 
     cp = configparser.ConfigParser()
     if len(cp.read('./connections.ini')) == 0:

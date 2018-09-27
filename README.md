@@ -140,8 +140,11 @@ In order to see how each of the classes is performing against the others, a cust
 After training is done, the training and validation loss and accuracy are automatically plotted:
 ![acc loss](./readme_images/acc_loss_plot.png)
 
-To apply the trained model on the unlabeld test records, call:
+(Validation loss is smaller than training loss because of dropout which is only active during training)
+
+To apply the trained model on the unlabeld test records, set the call:
 ```
 # apply trained model to test data and create a csv file of these results
->> python inference.py
+# e.g. with experiment_id = 5bac50ca32b9011693a63274
+>> python inference.py 5bac50ca32b9011693a63274
 ```
