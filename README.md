@@ -91,7 +91,7 @@ Apart from that, the class distribution of the original dataset also shows other
 - *light*: merge [Dunkelheit: Strassenbleuctung vorhanden und nicht beleuchtet, Dunkeleheit keine Strassenbleuchtung] as it basically is the same.
 
 e.g. age distrubtion plot:</br>
-![age post sample](./readme_images/age_post_sample.png)
+![age pre sample](./readme_images/age_pre_sample.png)
 
 
 <a name="data_sampling"></a>
